@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import ventasdao.ui.abm.AbmCategoria;
 import ventasdao.ui.abm.AbmCliente;
 import ventasdao.ui.abm.AbmCliente;
+import ventasdao.ui.abm.AbmFactura;
 import ventasdao.ui.abm.AbmProducto;
 import ventasdao.ui.abm.AbmTipoCLiente;
 
@@ -42,6 +43,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jmiProducto = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,6 +96,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("Factura");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
 
@@ -161,6 +171,14 @@ public class Principal extends javax.swing.JFrame {
         abmTipoCliente.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        
+        AbmFactura abmFactura = new AbmFactura();
+        jdpContenedorPrincipal.add(abmFactura);
+        abmFactura.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -201,6 +219,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JDesktopPane jdpContenedorPrincipal;
     private javax.swing.JMenuItem jmiCategoria;
     private javax.swing.JMenuItem jmiProducto;

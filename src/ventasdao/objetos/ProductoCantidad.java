@@ -2,13 +2,43 @@ package ventasdao.objetos;
 
 import java.util.Date;
 
-public class Producto {
+public class ProductoCantidad {
     
     private Integer id;
 
     private Categoria categoria;
     
     private Integer categoriaId;
+
+
+    
+    private String nombre;
+
+    private String descripcion;
+
+    private Float precio;
+    
+    private Date fechaCreacion;
+    
+    private Integer cantidad; 
+    
+    private Float Importe;
+
+    public Float getImporte() {
+        return Importe;
+    }
+
+    public void setImporte(Float Importe) {
+        this.Importe = Importe;
+    }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
 
     public Integer getCategoriaId() {
         return categoriaId;
@@ -18,14 +48,6 @@ public class Producto {
         this.categoriaId = categoriaId;
     }
     
-    private String nombre;
-
-    private String descripcion;
-
-    private Float precio;
-    
-    private Date fechaCreacion;
-
     public Integer getId() {
         return id;
     }

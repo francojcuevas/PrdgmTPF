@@ -37,6 +37,10 @@ public class ProductoControlador implements ICrud<Producto>{
     private String query;
     
     private CategoriaControlador categoriaControlador;
+    
+    private ResultSet rs;
+    
+    private String sql;
 
 
     @Override
@@ -46,7 +50,6 @@ public class ProductoControlador implements ICrud<Producto>{
         String sql = "INSERT INTO productos (nombre,descripcion,precio,fecha_creacion, categoria_id) VALUES (?,?,?,?,?)";
         
 
-        
         try {
             
             java.sql.Date fecha;
@@ -92,8 +95,40 @@ public class ProductoControlador implements ICrud<Producto>{
     }
 
     @Override
-    public Producto extraer(int id) {
-        return null;
+    public Producto extraer(int id) throws SQLException, ClassNotFoundException {
+        
+            Producto producto = new Producto();
+        
+            try{
+                connection = Conexion.obtenerConexion();
+                sql = "SELECT * FROM productos WHERE id = ?";
+                ps = connection.prepareStatement(sql);
+
+                ps.setInt(1, id);
+
+                this.rs = ps.executeQuery();
+
+                this.rs.next();
+                
+                producto = new Producto();
+                System.out.println("resulset -> " + rs.getFloat("precio") );
+                        
+                producto.setNombre(rs.getString("nombre"));
+                producto.setDescripcion(rs.getString("descripcion"));
+                producto.setId(rs.getInt("id"));
+                producto.setPrecio (rs.getFloat("precio"));
+                producto.setFechaCreacion(rs.getDate("fecha_creacion"));
+                producto.setCategoriaId(rs.getInt("categoria_id"));
+                
+                connection.close();
+            }catch(SQLException ex) {
+                System.out.println(ex.getMessage());
+                ex.printStackTrace();
+            }
+
+            
+            return producto;
+        
     }
 
     @Override
@@ -141,7 +176,7 @@ public class ProductoControlador implements ICrud<Producto>{
                 
 
 
-                        //System.out.println(cliente);
+                System.out.println("precio -> " + producto.getPrecio() );
 
                 productos.add(producto);
                 

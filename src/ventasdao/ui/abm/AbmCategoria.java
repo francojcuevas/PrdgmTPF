@@ -222,10 +222,6 @@ public class AbmCategoria extends javax.swing.JInternalFrame implements IShowExc
         
        Categoria miCategoria = grillaCategoria.getCategoriaFromRow(jtListadoCategorias.getSelectedRow());
        
-       
-       
-       System.out.println("ID->" + miCategoria.getId());
-       
        jtfDenominacion.setText(miCategoria.getDenominacion());
        jtfDescripcion.setText(miCategoria.getDescripcion());
        jtfId.setText( miCategoria.getId().toString() );
@@ -245,11 +241,12 @@ public class AbmCategoria extends javax.swing.JInternalFrame implements IShowExc
             categoria.setDescripcion( jtfDescripcion.getText() );
             categoria.setId( Integer.parseInt( jtfId.getText() ) );
             
+            ClearMensajesDeValidacion();
             if(!ValidarCampos(categoria)){
                 return;
             }
             
-            ClearMensajesDeValidacion();
+            
             
             categoriaControlador.modificar(categoria);
         } catch (Exception ex) {
@@ -284,11 +281,12 @@ public class AbmCategoria extends javax.swing.JInternalFrame implements IShowExc
         categoria.setDenominacion(jtfDenominacion.getText());
         categoria.setDescripcion(jtfDescripcion.getText());
         
+        ClearMensajesDeValidacion();
         if(!ValidarCampos(categoria)){
             return;
         }
         
-        ClearMensajesDeValidacion();
+        
 
         try {
             categoriaControlador.crear(categoria);
@@ -369,12 +367,12 @@ public class AbmCategoria extends javax.swing.JInternalFrame implements IShowExc
 
         boolean valido = true; 
         
-        if( categoria.getDenominacion().trim().isEmpty()){
+        if( categoria.getDenominacion().trim().isEmpty() || categoria.getDenominacion().trim().length() < 3 ){
             jLabel6.setText("El campo denominación está vacío o tiene menos de 3 caracteres.");
             valido = false;
         } 
         
-        if(categoria.getDescripcion().trim().isEmpty()){
+        if(categoria.getDescripcion().trim().isEmpty() || categoria.getDescripcion().trim().length() < 3 ){
             jLabel7.setText("El campo Descripción está vacío o tiene menos de 3 caracteres.");
             valido = false; 
         }

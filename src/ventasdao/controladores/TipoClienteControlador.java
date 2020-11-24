@@ -74,6 +74,8 @@ public class TipoClienteControlador implements ICrud<TipoCliente>{
     @Override
     public TipoCliente extraer(int id) throws SQLException, Exception {
             
+            
+        
             connection = Conexion.obtenerConexion();
             sql = "SELECT * FROM tipo_cliente WHERE id = ?";
             ps = connection.prepareStatement(sql);

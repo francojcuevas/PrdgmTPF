@@ -13,6 +13,8 @@ import java.util.Date;
  */
 public class Cliente {
     
+    
+    
     private Integer id;
     
     private String documento;
@@ -26,6 +28,8 @@ public class Cliente {
     private Date fechaNacimiento;
 
     private String cuil;
+    
+    private Integer tipoClienteId = 0;
 
     public String getCuil() {
         return cuil;
@@ -47,6 +51,14 @@ public class Cliente {
 
     public TipoCliente getTipoCliente() {
         return tipoCliente;
+    }
+    
+    public int getTipoClienteId(){
+        return tipoClienteId;
+    }
+
+    public void setTipoClienteId(Integer tipoClienteId) {
+        this.tipoClienteId = tipoClienteId;
     }
 
     public void setTipoCliente(TipoCliente tipoCliente) {
@@ -87,7 +99,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "documento=" + documento + ", nombre=" + nombre + ", apellido=" + apellido + ", tipoCliente=" + tipoCliente + ", fechaNacimiento=" + fechaNacimiento + '}';
+        return "Cliente{" + "documento=" + documento + ", nombre=" + nombre + ", apellido=" + apellido + ", tipoClienteId=" + tipoClienteId + ", fechaNacimiento=" + fechaNacimiento + '}';
     }
 
  

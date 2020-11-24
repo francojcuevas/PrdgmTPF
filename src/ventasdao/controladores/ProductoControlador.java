@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ventasdao.dominio.Conexion;
@@ -43,9 +44,17 @@ public class ProductoControlador implements ICrud<Producto>{
         
         connection = Conexion.obtenerConexion ();
         String sql = "INSERT INTO productos (nombre,descripcion,precio,fecha_creacion, categoria_id) VALUES (?,?,?,?,?)";
-        Date fecha = new Date(entidad.getFechaCreacion().getTime());
+        
+
         
         try {
+            
+            java.sql.Date fecha;
+            long millis=System.currentTimeMillis();  
+            fecha =new java.sql.Date(millis);  
+
+            
+            
             ps = connection.prepareStatement(sql);
             ps.setString(1, entidad.getNombre());
             ps.setString(2, entidad.getDescripcion());
@@ -63,7 +72,22 @@ public class ProductoControlador implements ICrud<Producto>{
     }
 
     @Override
-    public boolean eliminar(Producto entidad) {
+    public boolean eliminar(Producto entidad) throws ClassNotFoundException {
+       
+        try {
+            connection = Conexion.obtenerConexion ();
+            this.query = "DELETE FROM productos WHERE id=?";
+
+            ps = connection.prepareStatement(this.query);
+            ps.setInt(1, entidad.getId());
+
+            ps.execute();
+            connection.close();
+            return true;
+        } catch (SQLException ex) {
+            //notifyListeners(ex.getMessage());
+            Logger.getLogger(CategoriaControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return false;
     }
 
@@ -73,8 +97,23 @@ public class ProductoControlador implements ICrud<Producto>{
     }
 
     @Override
-    public boolean modificar(Producto entidad) {
-        return false;
+    public boolean modificar(Producto entidad) throws SQLException, ClassNotFoundException {
+        
+       connection = Conexion.obtenerConexion ();
+       this.query = "UPDATE productos SET nombre=?, descripcion=?, categoria_id = ?, precio = ? WHERE id=?";
+        
+       ps = connection.prepareStatement(this.query);
+       ps.setString(1,entidad.getNombre() );
+       ps.setString(2,entidad.getDescripcion() );
+       ps.setInt(3,entidad.getCategoriaId() );
+       ps.setDouble(4, entidad.getPrecio() );
+       
+       
+       ps.setInt(5, entidad.getId());
+       
+       ps.executeUpdate();
+       connection.close();
+       return true;
     }
 
     @Override
@@ -98,7 +137,10 @@ public class ProductoControlador implements ICrud<Producto>{
                 producto.setId(resultSet.getInt("id"));
                 producto.setPrecio (resultSet.getFloat("precio"));
                 producto.setFechaCreacion(resultSet.getDate("fecha_creacion"));
-                producto.setCategoria(getCategoria(resultSet.getInt("categoria_id")));
+                producto.setCategoriaId(resultSet.getInt("categoria_id"));
+                
+
+
                         //System.out.println(cliente);
 
                 productos.add(producto);

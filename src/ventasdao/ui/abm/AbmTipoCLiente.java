@@ -234,6 +234,13 @@ public class AbmTipoCLiente extends javax.swing.JInternalFrame implements IShowE
             tipoCliente.setDescripcion( jtfDescripcion.getText() );
             tipoCliente.setId( Integer.parseInt( jtfId.getText() ) );
             
+            ClearMensajesDeValidacion();
+            if(!ValidarCampos(tipoCliente)){
+                return;
+            }
+
+            
+            
             tipoClienteControlador.modificar(tipoCliente);
         } catch (Exception ex) {
             Logger.getLogger(AbmTipoCLiente.class.getName()).log(Level.SEVERE, null, ex);
@@ -260,6 +267,15 @@ public class AbmTipoCLiente extends javax.swing.JInternalFrame implements IShowE
 
         tipoCliente.setNombre(jtfDenominacion.getText());
         tipoCliente.setDescripcion(jtfDescripcion.getText());
+        
+        ClearMensajesDeValidacion();
+        
+        if(!ValidarCampos(tipoCliente)){
+            return;
+        }
+        
+        
+        
 
         try {
             tipoClienteControlador.crear(tipoCliente);
@@ -332,16 +348,16 @@ public class AbmTipoCLiente extends javax.swing.JInternalFrame implements IShowE
         jLabel5.setText("");
     }
     
-    public boolean ValidarCampos(Categoria categoria ){
+    public boolean ValidarCampos(TipoCliente tipoCliente ){
 
         boolean valido = true; 
         
-        if( categoria.getDenominacion().trim().isEmpty()){
+        if( tipoCliente.getNombre().trim().isEmpty() || tipoCliente.getNombre().trim().length() < 3 ){
             jLabel4.setText("El Nombre está vacío o tiene menos de 3 caracteres.");
             valido = false;
         } 
         
-        if(categoria.getDescripcion().trim().isEmpty()){
+        if(tipoCliente.getDescripcion().trim().isEmpty() || tipoCliente.getDescripcion().trim().length() < 3 ){
             jLabel5.setText("Descripción está vacío o tiene menos de 3 caracteres.");
             valido = false; 
         }

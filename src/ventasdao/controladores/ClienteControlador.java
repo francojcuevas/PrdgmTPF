@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import ventasdao.dominio.Conexion;
+import ventasdao.objetos.Categoria;
 import ventasdao.objetos.Cliente;
 
 /**
@@ -64,8 +65,23 @@ public class ClienteControlador implements ICrud<Cliente>{
     }
 
     @Override
-    public boolean eliminar(Cliente entidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean eliminar(Cliente entidad) throws ClassNotFoundException {
+        
+        try {
+            connection = Conexion.obtenerConexion();
+            this.sql = "DELETE FROM clientes WHERE id=?";
+
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, entidad.getId());
+
+            ps.execute();
+            connection.close();
+            return true;
+        } catch (SQLException ex) {
+            //notifyListeners(ex.getMessage());
+            //Logger.getLogger(CategoriaControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     @Override
@@ -90,6 +106,8 @@ public class ClienteControlador implements ICrud<Cliente>{
                 cliente.setId(rs.getInt("id"));
                 cliente.setApellido (rs.getString("apellido"));
                 cliente.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
+                cliente.setTipoClienteId(rs.getInt("tipo_cliente_id"));
+                
                 System.out.println(cliente);
 
                 clientes.add(cliente);
@@ -107,13 +125,55 @@ public class ClienteControlador implements ICrud<Cliente>{
     }
 
     @Override
-    public boolean modificar(Cliente entidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean modificar(Cliente entidad) throws SQLException, ClassNotFoundException {
+        
+       connection = Conexion.obtenerConexion();
+       try{
+        
+        this.sql = "UPDATE clientes SET apellido=?, nombre=?, cuil = ?, fecha_nacimiento = ?, tipo_cliente_id = ?  WHERE id=?";
+
+        ps = connection.prepareStatement(sql);
+        ps.setString(1,entidad.getApellido());
+        ps.setString(2,entidad.getNombre() );
+        ps.setString(3,entidad.getCuil());
+        ps.setDate(4,new java.sql.Date( entidad.getFechaNacimiento().getTime() ));
+        ps.setInt(5,entidad.getTipoClienteId());
+        ps.setInt(6, entidad.getId());
+
+        ps.executeUpdate();
+        connection.close();
+       }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+       
+       return true;
+       
     }
 
     @Override
-    public Cliente extraer(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Cliente extraer(int id) throws SQLException, ClassNotFoundException {
+        
+            connection = Conexion.obtenerConexion();
+            sql = "SELECT * FROM clientes WHERE id = ?";
+            ps = connection.prepareStatement(sql);
+            
+            ps.setInt(1, id);
+                  
+            this.rs   = ps.executeQuery();
+            
+            connection.close();
+            
+            this.rs.next();
+            Cliente cliente = new Cliente();
+      
+            cliente.setNombre(rs.getString("nombre"));
+            cliente.setCuil(rs.getString("cuil"));
+            cliente.setId(rs.getInt("id"));
+            cliente.setApellido (rs.getString("apellido"));
+            cliente.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
+            cliente.setTipoClienteId(rs.getInt("tipo_cliente_id"));
+            
+            return cliente;
     }
 
     

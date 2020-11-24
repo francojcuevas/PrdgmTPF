@@ -7,7 +7,17 @@ public class Producto {
     private Integer id;
 
     private Categoria categoria;
+    
+    private Integer categoriaId;
 
+    public Integer getCategoriaId() {
+        return categoriaId;
+    }
+
+    public void setCategoriaId(Integer categoriaId) {
+        this.categoriaId = categoriaId;
+    }
+    
     private String nombre;
 
     private String descripcion;

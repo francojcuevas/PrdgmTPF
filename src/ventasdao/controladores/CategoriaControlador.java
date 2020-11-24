@@ -119,8 +119,6 @@ public class CategoriaControlador implements ICrud<Categoria>{
     @Override
     public Categoria extraer(int id) throws SQLException, Exception{
                 
-            System.out.println("por aquí");
-        
             connection = Conexion.obtenerConexion();
             sql = "SELECT * FROM categorias WHERE id = ?";
             ps = connection.prepareStatement(sql);

@@ -72,6 +72,11 @@ public class GrillaProducto extends AbstractTableModel{
    public void reemplazarLista(ArrayList<Producto> nuevaLista){
        productos = nuevaLista;
    }
+   
+    public Producto getProductoFromRow(int rowIndex){
+   
+        return productos.get(rowIndex);
+   }
     
     
 }

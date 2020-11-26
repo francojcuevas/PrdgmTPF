@@ -32,7 +32,7 @@ public class GrillaProducto extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-         return 6;
+         return 5;
     }
 
     @Override
@@ -41,10 +41,10 @@ public class GrillaProducto extends AbstractTableModel{
         switch(columnIndex){
               case 0: return producto.getId();
               case 1: return producto.getNombre();
-              case 5: return producto.getDescripcion();
-              case 3: return producto.getPrecio();
-              case 4: return producto.getFechaCreacion();
-              case 2: return producto.getCategoria();
+              case 4: return producto.getDescripcion();
+              case 2: return producto.getPrecio();
+              case 3: return producto.getFechaCreacion();
+          //    case 2: return producto.getCategoria();
               default: return "";
           }
         
@@ -55,10 +55,10 @@ public class GrillaProducto extends AbstractTableModel{
         switch(column){
             case 0: return "ID";
             case 1: return "NOMBRE";
-            case 5: return "Descripcion";
-            case 3: return "Precio";
-            case 4: return "Fecha Creacion";
-            case 2: return "Categoria";
+            case 4: return "Descripcion";
+            case 2: return "Precio";
+            case 3: return "Fecha Creacion";
+   //         case 2: return "Categoria";
             default: return "";
         
         

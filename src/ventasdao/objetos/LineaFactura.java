@@ -7,6 +7,28 @@ public class LineaFactura {
     private Double cantidad;
     
     private Producto producto;
+    
+    private Factura factura; 
+    
+    private Double Importe;
+
+    public Double getImporte() {
+        return Importe;
+    }
+
+    public void setImporte(Double Importe) {
+        this.Importe = Importe;
+    }
+
+    public Factura getFactura() {
+        return factura;
+    }
+
+    public void setFactura(Factura factura) {
+        this.factura = factura;
+    }
+    
+    //factura
 
     public Integer getId() {
         return id;

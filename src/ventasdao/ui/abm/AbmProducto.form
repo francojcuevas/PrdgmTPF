@@ -242,7 +242,6 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="96" green="96" red="f0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="jLabel7"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jlbDescripcion">
@@ -250,7 +249,6 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="96" green="96" red="f0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="jLabel7"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jlbPrecio">
@@ -258,7 +256,6 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="96" green="96" red="f0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="jLabel7"/>
       </Properties>
     </Component>
   </SubComponents>

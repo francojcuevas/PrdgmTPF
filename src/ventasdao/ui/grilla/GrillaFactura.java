@@ -9,16 +9,25 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 import ventasdao.objetos.Cliente;
 import ventasdao.objetos.Factura;
+import ventasdao.objetos.LineaFactura;
 import ventasdao.objetos.Producto;
 import ventasdao.objetos.ProductoCantidad;
 
 
 public class GrillaFactura extends AbstractTableModel{
     
-    private ArrayList<ProductoCantidad> productos = new ArrayList<ProductoCantidad>();
-    public Float total = 0f;
+    private ArrayList<LineaFactura> productos = new ArrayList<LineaFactura>();
 
-    public GrillaFactura(ArrayList<ProductoCantidad> datos) {
+    public ArrayList<LineaFactura> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(ArrayList<LineaFactura> productos) {
+        this.productos = productos;
+    }
+    public Double total = 0d;
+
+    public GrillaFactura(ArrayList<LineaFactura> datos) {
         this.productos = datos;
     }
 
@@ -34,11 +43,11 @@ public class GrillaFactura extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-             ProductoCantidad c = productos.get(rowIndex);
+             LineaFactura c = productos.get(rowIndex);
                 
           switch(columnIndex){
-              case 0: return c.getNombre();
-              case 1: return c.getPrecio();
+              case 0: return c.getProducto().getNombre();
+              case 1: return c.getProducto().getPrecio();
               case 2: return c.getCantidad();
               case 3: return c.getImporte();
               default: return "";
@@ -61,7 +70,7 @@ public class GrillaFactura extends AbstractTableModel{
         
     }
     
-   public ProductoCantidad getCategoriaFromRow(int rowIndex){
+   public LineaFactura getCategoriaFromRow(int rowIndex){
    
             return productos.get(rowIndex);
    }
@@ -70,20 +79,20 @@ public class GrillaFactura extends AbstractTableModel{
        productos.clear();
    }
    
-   public void reemplazarLista(ArrayList<ProductoCantidad> nuevaLista){
+   public void reemplazarLista(ArrayList<LineaFactura> nuevaLista){
        productos = nuevaLista;
    }
    
-   public void agregar(ProductoCantidad productoCantidad){
+   public void agregar(LineaFactura productoCantidad){
        
        productos.add(productoCantidad);
        calcularTotal();
    }
    
    public void calcularTotal(){
-       float total = 0f; 
+       Double total = 0d; 
        
-       for(ProductoCantidad pr : productos){
+       for(LineaFactura pr : productos){
            total = total + ( pr.getImporte() );
        }
        

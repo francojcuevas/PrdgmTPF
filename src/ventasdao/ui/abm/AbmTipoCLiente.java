@@ -139,10 +139,8 @@ public class AbmTipoCLiente extends javax.swing.JInternalFrame implements IShowE
         });
 
         jLabel4.setForeground(new java.awt.Color(240, 150, 150));
-        jLabel4.setText("jLabel4");
 
         jLabel5.setForeground(new java.awt.Color(240, 150, 150));
-        jLabel5.setText("jLabel4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

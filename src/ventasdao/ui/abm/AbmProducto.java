@@ -154,13 +154,10 @@ public class AbmProducto extends javax.swing.JInternalFrame {
         });
 
         jlbNombre.setForeground(new java.awt.Color(240, 150, 150));
-        jlbNombre.setText("jLabel7");
 
         jlbDescripcion.setForeground(new java.awt.Color(240, 150, 150));
-        jlbDescripcion.setText("jLabel7");
 
         jlbPrecio.setForeground(new java.awt.Color(240, 150, 150));
-        jlbPrecio.setText("jLabel7");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

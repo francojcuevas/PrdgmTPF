@@ -39,9 +39,9 @@ public class CategoriaControlador implements ICrud<Categoria>{
     
     public ArrayList<Categoria> listar() throws SQLException, Exception{
         
-        System.out.println("Listando");
+      
     
-     connection = Conexion.obtenerConexion ();
+        connection = Conexion.obtenerConexion ();
         try{
             
             this.stmt = connection.createStatement();
